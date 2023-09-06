@@ -1,6 +1,6 @@
 package com.smk.cashier.model;
 
-public class Barang extends model {
+public class Barang extends Model {
     private String kodeBarang;
     private String namaBarang;
     private int hargaBarang;
