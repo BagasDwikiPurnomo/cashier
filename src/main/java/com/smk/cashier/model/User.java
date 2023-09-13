@@ -22,7 +22,7 @@ public class User extends Model {
 
     @Override
     public String toString() {
-        return "user{" +
+        return "User{" +
                 "username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", dateCreated=" + dateCreated +

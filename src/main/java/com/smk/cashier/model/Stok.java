@@ -1,6 +1,6 @@
 package com.smk.cashier.model;
 
-public class Stok extends model {
+public class Stok extends Model {
     private int id;
     private String kodeBarang;
     private int StokBarang;
