@@ -10,49 +10,80 @@ import java.util.StringTokenizer;
 public class BarangService {
     FileReader barangServiceReader;
     FileWriter barangServiceWriter;
-    List<Barang> barangList = new LinkedList<>();
 
-
-    private static BarangService barangService = null;
-
+    List<Barang> barangList =
+            new LinkedList<>();
+    private static BarangService
+            barangService=null;
     private BarangService() {
         try {
-            barangServiceReader = new FileReader("barang.txt");
-            barangServiceWriter = new FileWriter("barang.txt");
+            barangServiceWriter = new
+                    FileWriter
+                    ("barang.txt");
+            barangServiceReader = new
+                    FileReader
+                    ("barang.txt");
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
-    public static synchronized BarangService getInstance() {
-        if (barangService == null) {
-            barangService = new BarangService();
+    public static synchronized
+    BarangService getInstance() {
+        if(barangService == null){
+            barangService
+                    = new
+                    BarangService();
         }
         return barangService;
     }
 
-    private void readFile() {
-        BufferedReader bufferedReader = new BufferedReader(barangServiceReader);
-        List<String> stringList = bufferedReader.lines().toList();
+    private void readFile(){
+        BufferedReader bufferedReader
+                = new BufferedReader(
+                barangServiceReader
+        );
+        List<String> stringList =
+                bufferedReader.lines()
+                        .toList();
         barangList = new LinkedList<>();
-        for (String string: stringList){
-            barangList.add(parsingLineToBarang(string));
+        for (String string: stringList
+        ) {
+            barangList.add(
+                    parsingLineToBarang(string)
+            );
         }
     }
+
     private void writeFile(){
-        BufferedWriter bufferedWriter = new BufferedWriter(barangServiceWriter);
-        for (int i = 0; i < barangList.size(); i++) {
-            Barang barang = barangList.get(i);
-            StringBuilder sb = new StringBuilder();
+        try {
+            barangServiceWriter = new
+                    FileWriter
+                    ("barang.txt");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        BufferedWriter bufferedWriter
+                = new BufferedWriter(
+                barangServiceWriter
+        );
+        for (int i = 0; i <
+                barangList.size();
+             i++) {
+            Barang barang = barangList
+                    .get(i);
+            StringBuilder sb =
+                    new StringBuilder();
             sb.append(barang.getKodeBarang());
             sb.append("|");
             sb.append(barang.getNamaBarang());
             sb.append("|");
             sb.append(barang.getHargaBarang());
             try {
-                bufferedWriter.write(sb.toString());
-                if (i < barangList.size() - 1){
+                bufferedWriter.write(
+                        sb.toString()
+                );
+                if(i < barangList.size() - 1){
                     bufferedWriter.newLine();
                 }
             } catch (IOException e) {
@@ -60,24 +91,33 @@ public class BarangService {
             }
         }
         try {
-            bufferedWriter.close();
+            bufferedWriter.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private <string> Barang parsingLineToBarang(String string) {
-        StringTokenizer st = new StringTokenizer(string, "|");
-        int id = 0;
+    private Barang parsingLineToBarang
+            (String string){
+        StringTokenizer st
+                = new StringTokenizer(
+                string, "|");
+        int id =0;
         Barang barang = new Barang();
-        while (st.hasMoreElements()) {
-            if (id == 0) {
-                barang.setKodeBarang(st.nextToken());
-            } else if (id == 1) {
-                barang.setNamaBarang(st.nextToken());
-
+        while (st.hasMoreElements()){
+            if(id == 0) {
+                barang.setKodeBarang(
+                        st.nextToken()
+                );
+            } else if (id == 1){
+                barang.setNamaBarang(
+                        st.nextToken()
+                );
             } else if (id == 2) {
-                barang.setHargaBarang(Integer.parseInt(st.nextToken()));
+                barang.setHargaBarang(
+                        Integer.parseInt(
+                                st.nextToken())
+                );
             }
             id++;
         }
@@ -89,7 +129,8 @@ public class BarangService {
         return barangList;
     }
 
-    public void addBarang(Barang barang){
+    public void addBarang(
+            Barang barang){
         barangList.add(barang);
         writeFile();
     }
