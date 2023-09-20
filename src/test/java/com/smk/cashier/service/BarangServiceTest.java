@@ -29,6 +29,13 @@ class BarangServiceTest {
         mouse.setHargaBarang(100000);
         BarangService.getInstance()
                 .addBarang(mouse);
+
+        Barang laptopGaming = new Barang();
+        laptopGaming.setKodeBarang("LP002");
+        laptopGaming.setNamaBarang("Laptop Gaming");
+        laptopGaming.setHargaBarang(20000000);
+        BarangService.getInstance()
+                .addBarang(laptopGaming);
     }
     @Test
     @Order(2)
@@ -38,6 +45,13 @@ class BarangServiceTest {
                 .getInstance()
                 .getBarangList();
         assertEquals(barangList.size()
-                ,2);
+                ,3);
+    }
+
+    @Test
+    @Order(3)
+    void findByName(){
+        List<Barang> resultList = BarangService .getInstance().findByName("Laptop");
+        assertEquals(resultList.size(),2);
     }
 }
