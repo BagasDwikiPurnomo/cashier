@@ -93,7 +93,7 @@ public class BarangDao implements Dao<Barang, Integer> {
                 ps.setInt(1, barang.getHargaBarang());
                 ps.setString(2, barang.getNamaBarang());
                 ps.setDate(3, new Date(new java.util.Date().getTime()));
-                ps.setString(4, "Kimihiko");
+                ps.setString(4, "Bgstopia");
                 ps.setString(5, barang.getKodeBarang());
                 int numberOfUpdatedRows = ps.executeUpdate();
             } catch (SQLException e) {
